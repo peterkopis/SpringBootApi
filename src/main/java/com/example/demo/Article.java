@@ -10,13 +10,15 @@ public class Article {
     @Id
     @SequenceGenerator(
             name = "article_name_id",
-            sequenceName = "article_name_id"
+            sequenceName = "article_name_id",
+            allocationSize = 1
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
             generator = "article_name_id"
+
     )
-    private int id;
+    private Integer id;
     private String description;
     private Date addAt;
     private boolean complete;
