@@ -3,9 +3,7 @@ package com.example.demo;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 //import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -30,6 +28,19 @@ public class DemoApplication {
 	public List<Article>getArticles(){
 
 		return articleRepository.findAll();
+	}
+
+	@PostMapping
+	public void addArticle( @RequestBody Article nuevoArticle){
+
+		articleRepository.save(nuevoArticle);
+
+	}
+
+	@DeleteMapping("{idArticle}")
+	public void deleteArticle(@PathVariable("idArticle") Integer articleId){
+
+		articleRepository.deleteById(articleId);
 	}
 	/*@GetMapping("/greet")
 	public GreetResponse greet2(){
