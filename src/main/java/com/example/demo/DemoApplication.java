@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @SpringBootApplication
 @RestController
@@ -41,6 +42,17 @@ public class DemoApplication {
 	public void deleteArticle(@PathVariable("idArticle") Integer articleId){
 
 		articleRepository.deleteById(articleId);
+	}
+
+	@PutMapping("{idArticle}")
+	public String changeArticle(@PathVariable("idArticle") Integer articleId,@RequestBody Article changedArticle){
+
+		Article loadedarticle=  articleRepository.getReferenceById(articleId);
+		changedArticle.setId(articleId);
+		articleRepository.saveAndFlush(changedArticle);
+		return "is Changed";
+
+
 	}
 	/*@GetMapping("/greet")
 	public GreetResponse greet2(){
